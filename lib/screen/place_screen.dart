@@ -28,8 +28,8 @@ class _State extends State<PlaceScreen>{
       Place("https://tinyurl.com/yguc9cl9", "Angkor wat", "Siem Reap", 3),
     ];
 
-//    return _buildPlaceList(places);
-    return _buildDynamicPlaceList();
+    return _buildPlaceList(places);
+//    return _buildDynamicPlaceList();
 //      MaterialApp(
 //        debugShowCheckedModeBanner: false,
 //        home: Scaffold(
