@@ -15,14 +15,19 @@ class PlaceDetailScreen extends StatefulWidget{
 }
 
 class _State extends State<PlaceDetailScreen> {
+
   @override
   Widget build(BuildContext context) {
+
+    final appBar = AppBar(
+      title: Text(widget.place.placeName),
+      backgroundColor: Color(0xFF41C300),
+    );
+
     // TODO: implement build
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: Text(widget.place.placeName),),
+    return Scaffold(
+        appBar: appBar,
         body: _buildBodyWidget(),
-      ),
     );
   }
 
