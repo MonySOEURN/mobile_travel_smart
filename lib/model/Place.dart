@@ -3,6 +3,10 @@ class Place{
   String placeName;
   String placeLocation;
   int placeRate;
+  String time;
+  String suggestTime;
+  String spendHour;
+  String description;
 
   Place(this.placeImage, this.placeName, this.placeLocation, this.placeRate);
 

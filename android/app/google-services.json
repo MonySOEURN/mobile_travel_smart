@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "956914026450",
+    "firebase_url": "https://mobiletravelsmart-b7d9e.firebaseio.com",
+    "project_id": "mobiletravelsmart-b7d9e",
+    "storage_bucket": "mobiletravelsmart-b7d9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956914026450:android:1ec9aa4c0389484883ea0b",
+        "android_client_info": {
+          "package_name": "com.mony.travel_smart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956914026450-1qi3a982emjek4ci9do54lb1jgcfj6fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJzQJJwYzeGg7YyAsi7GxR1FJfZ3uhFFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956914026450-1qi3a982emjek4ci9do54lb1jgcfj6fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
