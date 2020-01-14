@@ -28,8 +28,8 @@ class _State extends State<PlaceScreen>{
       Place("https://tinyurl.com/yguc9cl9", "Angkor wat", "Siem Reap", 3),
     ];
 
-    return _buildPlaceList(places);
-//    return _buildDynamicPlaceList();
+//    return _buildPlaceList(places);
+    return _buildDynamicPlaceList();
 //      MaterialApp(
 //        debugShowCheckedModeBanner: false,
 //        home: Scaffold(
@@ -41,52 +41,44 @@ class _State extends State<PlaceScreen>{
   Widget _buildDynamicPlaceList(){
     return StreamBuilder(
       stream: Firestore.instance.collection("places").snapshots(),
-      builder: (context, snapshot){
-        if(snapshot.connectionState == ConnectionState.done){
-          print(snapshot.data.documents);
-          return ListView.builder(
-              scrollDirection: Axis.vertical,
-              itemCount: snapshot.data.length,
-              itemBuilder: (BuildContext context, index){
-                return GestureDetector(
-                  onTap: (){
-                    print(snapshot.data[index]);
-                    final route = MaterialPageRoute(
-                        builder: (context){
-                          return PlaceDetailScreen(snapshot.data[index]);
-                        }
-                    );
-                    Navigator.push(context, route);
-                  },
-                  child: Container(
-                    height: 330,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image.network(
-                            snapshot.data[index].placeImage,
-                          ),
-                        ),
-                        Text(snapshot.data[index].placeName, style: TextStyle(fontSize: 20),),
-                        Text(snapshot.data[index].placeLocation),
-                        Text("${snapshot.data[index].placeRate}")
-                      ],
-                    ),
-                  ),
-                );
-              }
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot){
+        if( snapshot.hasError){
+          return Center(
+           child: Text(
+               'Load data error.'
+           ),
           );
         } else {
-          if(snapshot.hasError){
-            print("Error ${snapshot.hasError}");
-            return null;
+          if(snapshot.connectionState == ConnectionState.waiting){
+            print("waiting");
+            return Center(
+              child: CircularProgressIndicator(),
+            );
           } else {
-            return Center(child: CircularProgressIndicator());
+            print("done");
+            return _buildPlacesListWidget(snapshot.data);
           }
         }
       },
+    );
+  }
+
+  Widget _buildPlacesListWidget(QuerySnapshot data){
+    return ListView(
+      children: data.documents.map((document){
+        return Column(
+          children: <Widget>[
+            Text(document['placeName']),
+            IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: (){
+                final documentId = document.documentID;
+                Firestore.instance.collection('places').document(documentId).delete();
+              },
+            )
+          ],
+        );
+      }).toList(),
     );
   }
 
