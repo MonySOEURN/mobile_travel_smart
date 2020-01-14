@@ -5,7 +5,69 @@ import 'package:travel_smart/screen/plan_screen.dart';
 import 'package:travel_smart/screen/profile_screen.dart';
 import 'package:travel_smart/screen/save_place_screen.dart';
 
-class StartHomepageScreen extends StatelessWidget{
+class StartHomepageScreen extends StatefulWidget{
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return _State();
+  }
+}
+
+//enum Answer {YES, NO, MAYBE}
+
+class _State extends State<StartHomepageScreen>{
+
+//  String _answer = "";
+//
+//  void setAnswer(String value){
+//    setState(() {
+//      // To Do Action on Value
+//      _answer = value;
+//    });
+//  }
+//
+//  Future<Null> _askUser() async {
+//    switch(
+//      await showDialog(
+//        context: context,
+//        child: SimpleDialog(
+//          title: Text("Do you like flutter?"),
+//          children: <Widget>[
+//            SimpleDialogOption(
+//              onPressed:  (){
+//                Navigator.pop(context, Answer.YES);
+//              },
+//              child: Text("YES!!!!"),
+//            ),
+//            SimpleDialogOption(
+//              onPressed:  (){
+//                Navigator.pop(context, Answer.NO);
+//              },
+//              child: Text("NO!!!!"),
+//            ),
+//            SimpleDialogOption(
+//              onPressed:  (){
+//                Navigator.pop(context, Answer.MAYBE);
+//              },
+//              child: Text("MAYBE!!!!"),
+//            )
+//          ],
+//        )
+//      )
+//    ){
+//      case Answer.YES:
+//        setAnswer("Yes");
+//        break;
+//      case Answer.NO:
+//        setAnswer("No");
+//        break;
+//      case Answer.MAYBE:
+//        setAnswer("Maybe");
+//        break;
+//    }
+//  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -14,6 +76,22 @@ class StartHomepageScreen extends StatelessWidget{
     });
     final filterIcon = _buildAppBarIcons(Icon(Icons.filter_list), (){
       print("Press filter");
+      return DropdownButton(
+        items: [
+//          DropdownMenuItem(
+//            child: ListTile(
+//              title: Icon(Icons.flag),
+//              subtitle: Text("Item 1"),
+//            ),
+//          ),
+//          DropdownMenuItem(
+//            child: ListTile(
+//              title: Icon(Icons.flag),
+//              subtitle: Text("Item 1"),
+//            ),
+//          ),
+        ],
+      );
     });
 
     final appBar = AppBar(
@@ -49,6 +127,21 @@ class StartHomepageScreen extends StatelessWidget{
                     ),
                   ),
                 ),
+//                Text('You have answer ${_answer}'),
+//                RaisedButton(
+//                  child: Text("Click me"),
+//                  onPressed: (){
+//                    print("Click me");
+////                    _askUser();
+//                    showDialog(
+//                        context: context,
+//                        builder: (BuildContext context){
+//                          return AlertDialog(
+//                            title: Text("Hello"),
+//                            content: Text("What up"),
+//                          );
+//                    });
+//                }),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -69,7 +162,7 @@ class StartHomepageScreen extends StatelessWidget{
                       ]),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           ),
@@ -78,9 +171,33 @@ class StartHomepageScreen extends StatelessWidget{
   }
 
   Widget _buildAppBarIcons(Icon icon, Function press){
-    return IconButton(
-      icon: icon,
-      onPressed: press,
+    return GestureDetector(
+      onTap: press,
+      child: IconButton(
+        icon: icon,
+        onPressed: press,
+      ),
+    );
+  }
+
+  Widget _buildFilterDialog(){
+    return SimpleDialog(
+      title: const Text("Filter Options: "),
+      children: <Widget>[
+        _buildDialogElement("All"),
+        _buildDialogElement("Morning"),
+        _buildDialogElement("Afternoon"),
+        _buildDialogElement("Evening"),
+      ],
+    );
+  }
+
+  Widget _buildDialogElement(String key){
+    return  SimpleDialogOption(
+      child: Text(key),
+      onPressed: () {
+        print("Key $key");
+      },
     );
   }
 
