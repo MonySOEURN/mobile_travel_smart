@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_smart/screen/google_map.dart';
 
 class PlanMapScreen extends StatelessWidget{
   @override
@@ -9,9 +10,60 @@ class PlanMapScreen extends StatelessWidget{
         title: Text("Travel Smart"),
         backgroundColor: Color(0xFF41C300),
       ),
-      body: Center(
-        child: Text("Map"),
-      ),
+      body: DefaultTabController(
+          length: 2,
+          child: Column(
+            children: <Widget>[
+              Container(
+    //                  constraints: BoxConstraints.expand(height: 50),
+                child: new Material(
+
+    //                    color: Colors.black,
+                  child: new TabBar(
+                    labelColor: Colors.black,
+                    tabs: [
+                      Tab(text: "Place Map",),
+                      Tab(text: "Place List",),
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    child: TabBarView(children: [
+                      Container(
+                        height: 500,
+                        width: 500,
+                        child: MapWidget(11.5682853,104.8884816),
+                      ),
+                      Container(
+                        child: _buildAddedPlaceListWidget(),
+                      ),
+                    ]),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+    );
+  }
+
+  Widget _buildMapWidget(){
+    return Center(
+      child: Container(
+        height: 500,
+        width: 500,
+//        child: MapSample(),
+      )
+    );
+  }
+
+  Widget _buildAddedPlaceListWidget(){
+    return Center(
+      child: Text("Places list"),
     );
   }
 

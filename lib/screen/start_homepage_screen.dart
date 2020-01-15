@@ -20,6 +20,8 @@ class StartHomepageScreen extends StatefulWidget{
 
 class _State extends State<StartHomepageScreen>{
 
+  final menu = ["All","Morning","Afternoon","Evening"];
+
   @override
   Widget build(BuildContext context) {
 
@@ -35,8 +37,24 @@ class _State extends State<StartHomepageScreen>{
       backgroundColor: Color(0xFF41C300),
       title: Text("Travel Smart", style: TextStyle(color: Colors.black),),
       actions: <Widget>[
-        searchIcon,
-        filterIcon
+        PopupMenuButton(
+            onSelected: _choiceAction,
+            icon: Icon(Icons.filter_list),
+            itemBuilder: ((BuildContext context){
+              return menu.map((item){
+                return PopupMenuItem(
+                  value: item,
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.check_box_outline_blank),
+                      SizedBox(width: 5,),
+                      Text(item),
+                    ],
+                  )
+                );
+              }).toList();
+            })
+        )
       ],
     );
 
@@ -55,7 +73,7 @@ class _State extends State<StartHomepageScreen>{
                     child: new TabBar(
                       labelColor: Colors.black,
                       tabs: [
-                        Tab(icon: Icon(Icons.place),),
+                        Tab(icon: Icon(Icons.place), ),
                         Tab(icon: Icon(Icons.save_alt),),
                         Tab(icon: Icon(Icons.directions),),
                         Tab(icon: Icon(Icons.account_circle),),
@@ -89,6 +107,26 @@ class _State extends State<StartHomepageScreen>{
           ),
         ),
     );
+  }
+
+  void _choiceAction(String choice){
+    switch(choice){
+      case "All":{
+        print("All");
+        break;
+      }
+      case "Morning":{
+        print("Morning");
+        break;
+      }
+      case "Afternoon":{
+        print("Afternoon");
+        break;
+      }
+      default :{
+        print("Evening");
+      }
+    }
   }
 
   Widget _buildAppBarIcons(Icon icon, Function press){
