@@ -14,59 +14,8 @@ class StartHomepageScreen extends StatefulWidget{
   }
 }
 
-//enum Answer {YES, NO, MAYBE}
 
 class _State extends State<StartHomepageScreen>{
-
-//  String _answer = "";
-//
-//  void setAnswer(String value){
-//    setState(() {
-//      // To Do Action on Value
-//      _answer = value;
-//    });
-//  }
-//
-//  Future<Null> _askUser() async {
-//    switch(
-//      await showDialog(
-//        context: context,
-//        child: SimpleDialog(
-//          title: Text("Do you like flutter?"),
-//          children: <Widget>[
-//            SimpleDialogOption(
-//              onPressed:  (){
-//                Navigator.pop(context, Answer.YES);
-//              },
-//              child: Text("YES!!!!"),
-//            ),
-//            SimpleDialogOption(
-//              onPressed:  (){
-//                Navigator.pop(context, Answer.NO);
-//              },
-//              child: Text("NO!!!!"),
-//            ),
-//            SimpleDialogOption(
-//              onPressed:  (){
-//                Navigator.pop(context, Answer.MAYBE);
-//              },
-//              child: Text("MAYBE!!!!"),
-//            )
-//          ],
-//        )
-//      )
-//    ){
-//      case Answer.YES:
-//        setAnswer("Yes");
-//        break;
-//      case Answer.NO:
-//        setAnswer("No");
-//        break;
-//      case Answer.MAYBE:
-//        setAnswer("Maybe");
-//        break;
-//    }
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,22 +25,6 @@ class _State extends State<StartHomepageScreen>{
     });
     final filterIcon = _buildAppBarIcons(Icon(Icons.filter_list), (){
       print("Press filter");
-      return DropdownButton(
-        items: [
-//          DropdownMenuItem(
-//            child: ListTile(
-//              title: Icon(Icons.flag),
-//              subtitle: Text("Item 1"),
-//            ),
-//          ),
-//          DropdownMenuItem(
-//            child: ListTile(
-//              title: Icon(Icons.flag),
-//              subtitle: Text("Item 1"),
-//            ),
-//          ),
-        ],
-      );
     });
 
     final appBar = AppBar(
@@ -127,21 +60,6 @@ class _State extends State<StartHomepageScreen>{
                     ),
                   ),
                 ),
-//                Text('You have answer ${_answer}'),
-//                RaisedButton(
-//                  child: Text("Click me"),
-//                  onPressed: (){
-//                    print("Click me");
-////                    _askUser();
-//                    showDialog(
-//                        context: context,
-//                        builder: (BuildContext context){
-//                          return AlertDialog(
-//                            title: Text("Hello"),
-//                            content: Text("What up"),
-//                          );
-//                    });
-//                }),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -180,26 +98,6 @@ class _State extends State<StartHomepageScreen>{
     );
   }
 
-  Widget _buildFilterDialog(){
-    return SimpleDialog(
-      title: const Text("Filter Options: "),
-      children: <Widget>[
-        _buildDialogElement("All"),
-        _buildDialogElement("Morning"),
-        _buildDialogElement("Afternoon"),
-        _buildDialogElement("Evening"),
-      ],
-    );
-  }
-
-  Widget _buildDialogElement(String key){
-    return  SimpleDialogOption(
-      child: Text(key),
-      onPressed: () {
-        print("Key $key");
-      },
-    );
-  }
 
   Widget _buildTabBar(String text, Icon icon){
     return Tab(

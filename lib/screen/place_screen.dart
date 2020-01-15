@@ -65,16 +65,46 @@ class _State extends State<PlaceScreen>{
 
   Widget _buildPlacesListWidget(QuerySnapshot data){
     return ListView(
+      scrollDirection: Axis.vertical,
       children: data.documents.map((document){
+        final id = document["id"];
+        final placeName = document["placeName"];
+        final placeImage = document["placeImage"];
+        final placeLocation = document["placeLocation"];
+        final int placeRate = document["placeRate"];
+        Place place = Place(placeImage, placeName, placeLocation, placeRate);
         return Column(
           children: <Widget>[
-            Text(document['placeName']),
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: (){
-                final documentId = document.documentID;
-                Firestore.instance.collection('places').document(documentId).delete();
+            GestureDetector(
+              onTap: (){
+
+                print(document['id']);
+                final route = MaterialPageRoute(
+                  builder: (context){
+                    return PlaceDetailScreen(place);
+                  }
+                );
+                Navigator.push(context, route);
               },
+              child: Container(
+                height: 350,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: <Widget>[
+                      ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.network(
+                    document["placeImage"],
+//                    height: 260,
+//                    width: 270,
+                    ),
+                  ),
+                    Text(document["placeName"], style: TextStyle(fontSize: 20),),
+                    Text(document["placeLocation"]),
+                    Text("${document["placeRate"]}")
+                  ],
+                ),
+              ),
             )
           ],
         );
