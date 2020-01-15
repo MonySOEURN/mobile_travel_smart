@@ -1,44 +1,21 @@
 import 'package:flutter/material.dart';
 
-class LoginProfile extends StatelessWidget {
+
+class ForgetPassword extends StatelessWidget {
+  const ForgetPassword();
+
   @override
   Widget build(BuildContext context) {
-
-      final field = TextField(
+    final field = TextField(
       decoration: InputDecoration(
         fillColor: Colors.grey,
         border: new OutlineInputBorder(
           borderSide: new BorderSide(),
         ),
       ),
-    );
-
-    final passwordField = TextField(
-      decoration: InputDecoration(
-        fillColor: Colors.grey,
-        border: new OutlineInputBorder(
-          borderSide: new BorderSide(),
-        ),
-      ),
-      obscureText: true,
     );
 
     final emailLabel = Text("E-mail :", style: TextStyle(fontSize: 18,),);
-    final passwordLabel = Text("Passwordl :",style: TextStyle(fontSize: 18,),);
-
-    final labelText = Center(
-      child: Text(
-        'Forget password?',
-        style: TextStyle(fontSize: 20, color: Colors.blue),
-      ),
-    );
-    final loginText = Center(
-      child: Text(
-        'LOGIN',
-        style: TextStyle(fontSize: 30, color: Colors.blue),
-      ),
-    );
-
 
 
     final formWidget = Padding(
@@ -54,16 +31,24 @@ class LoginProfile extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-          passwordLabel,
-            SizedBox(
-            height: 10,
-          ),
-          passwordField,
         ],
       ),
     );
+     final loginText = Center(
+      child: Text(
+        'Forgot password',
+        style: TextStyle(fontSize: 30, color: Colors.blue),
+      ),
+    );
 
-    final submitBtn = Center(
+    final loginLabel = Center(
+      child: Text(
+        'LOGIN ?',
+        style: TextStyle(fontSize: 18, color: Colors.blue),
+      ),
+    );
+
+  final submitBtn = Center(
         child: RaisedButton(
       color: Colors.green,
       onPressed: () {},
@@ -71,14 +56,20 @@ class LoginProfile extends StatelessWidget {
       padding: const EdgeInsets.all(5),
       child: Container(
         decoration: const BoxDecoration(),
-        child: const Text('LOG IN', style: TextStyle(fontSize: 20)),
+        child: const Text('Reset password', style: TextStyle(fontSize: 20)),
       ),
     ));
 
-    final body = ListView(
+
+
+
+
+
+
+     final body = ListView(
       children: <Widget>[
         SizedBox(
-          height: 60,
+          height: 80,
         ),
         loginText,
         SizedBox(
@@ -89,7 +80,7 @@ class LoginProfile extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        labelText,
+        loginLabel
       ],
     );
     return Scaffold(

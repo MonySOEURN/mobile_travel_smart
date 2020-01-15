@@ -12,73 +12,76 @@ class RegisterProfile extends StatelessWidget {
       ),
     );
 
-    final userName = TextField(
-      decoration: InputDecoration(
-        labelText: 'User name',
-        fillColor: Colors.grey,
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
-          borderSide: new BorderSide(),
-        ),
-      ),
-    );
+    final textGmail = Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        const Image( image: AssetImage('assets/gmail.jpg'),height: 120.0,
+              width: 80.0 ),
+        const Text( 'Sign Up with Gmail?',
+        style: TextStyle(fontSize: 20, color: Colors.blue),),
 
-    final email = TextField(
-      decoration: InputDecoration(
-        labelText: 'E-mail',
-        fillColor: Colors.grey,
-        border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
-          borderSide: new BorderSide(),
-        ),
-      ),
-      obscureText: true,
+      ],
     );
+    
+    final userNameLabel = Text("User Name :", style: TextStyle(fontSize: 18,),);
+    final emailLabel = Text("E-mail :",style: TextStyle(fontSize: 18,),);
+    final passwordLabel = Text("Password :",style: TextStyle(fontSize: 18,),);
+    final confirmPassLabel = Text("Cornfirm password :",style: TextStyle(fontSize: 18,),);
 
-    final password = TextField(
+    final passwordField = TextField(
       decoration: InputDecoration(
-        labelText: 'Password',
         fillColor: Colors.grey,
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(20.0),
           borderSide: new BorderSide(),
         ),
       ),
       obscureText: true,
     );
-    final confirmPassword = TextField(
+    final field = TextField(
       decoration: InputDecoration(
-        labelText: 'Cornfirm password',
         fillColor: Colors.grey,
         border: new OutlineInputBorder(
-          borderRadius: new BorderRadius.circular(25.0),
           borderSide: new BorderSide(),
         ),
       ),
-      obscureText: true,
     );
 
     final formWidget = Padding(
       padding: EdgeInsets.all(16),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           labelHeaderText,
+          SizedBox(height: 10,),
+          userNameLabel,
+          SizedBox(
+            height: 10,
+          ),
+          field,
           SizedBox(
             height: 20,
           ),
-          userName,
+          emailLabel,
+           SizedBox(
+            height: 10,
+          ),
+          field,
           SizedBox(
             height: 20,
           ),
-          email,
+          passwordLabel,
+           SizedBox(
+            height: 10,
+          ),
+          passwordField,
           SizedBox(
             height: 20,
           ),
-          password,
-          SizedBox(
-            height: 20,
+          confirmPassLabel,
+           SizedBox(
+            height: 10,
           ),
-          confirmPassword
+          passwordField,
         ],
       ),
     );
@@ -100,14 +103,10 @@ class RegisterProfile extends StatelessWidget {
         SizedBox(
           height: 20,
         ),
-        SizedBox(
-          height: 20,
-        ),
+      
         formWidget,
         submitBtn,
-        SizedBox(
-          height: 20,
-        ),
+       textGmail
       ],
     );
     return Scaffold(

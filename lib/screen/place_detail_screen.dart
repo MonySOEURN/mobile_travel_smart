@@ -125,7 +125,8 @@ class _State extends State<PlaceDetailScreen> {
     );
   }
 
-  Widget _buildTimeList(String key, String value) {
+  Widget _buildTimeList(String key, String value){
+    print(widget.place.placeImage);
     return Row(
       children: <Widget>[
         Text(key),
