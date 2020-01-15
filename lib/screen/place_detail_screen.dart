@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_smart/model/Place.dart';
 
-
-class PlaceDetailScreen extends StatefulWidget{
-
+class PlaceDetailScreen extends StatefulWidget {
   final Place place;
 
   PlaceDetailScreen(this.place);
@@ -15,10 +13,8 @@ class PlaceDetailScreen extends StatefulWidget{
 }
 
 class _State extends State<PlaceDetailScreen> {
-
   @override
   Widget build(BuildContext context) {
-
     final appBar = AppBar(
       title: Text(widget.place.placeName),
       backgroundColor: Color(0xFF41C300),
@@ -26,13 +22,12 @@ class _State extends State<PlaceDetailScreen> {
 
     // TODO: implement build
     return Scaffold(
-        appBar: appBar,
-        body: _buildBodyWidget(),
+      appBar: appBar,
+      body: _buildBodyWidget(),
     );
   }
 
-  Widget _buildBodyWidget(){
-
+  Widget _buildBodyWidget() {
     // place photo and name
     final placeInfo = Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -54,18 +49,15 @@ class _State extends State<PlaceDetailScreen> {
       child: Row(
         children: <Widget>[
           RaisedButton.icon(
-            onPressed: null,
-            icon: Icon(
-              Icons.flag,
-              color: Colors.black,
-            ),
-            label: Text(
-              "Save Place",
-              style: TextStyle(
-                color: Colors.black
+              onPressed: null,
+              icon: Icon(
+                Icons.flag,
+                color: Colors.black,
               ),
-            )
-          ),
+              label: Text(
+                "Save Place",
+                style: TextStyle(color: Colors.black),
+              )),
         ],
       ),
     );
@@ -76,15 +68,12 @@ class _State extends State<PlaceDetailScreen> {
       children: <Widget>[
         Text(
           "Description: ",
-          style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 16
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
         ),
-        SizedBox(height: 5,),
-        Text(
-            "Description Text area"
-        )
+        SizedBox(
+          height: 5,
+        ),
+        Text("Description Text area")
       ],
     );
 
@@ -95,7 +84,9 @@ class _State extends State<PlaceDetailScreen> {
         _buildTimeList("Time: ", "Open (8:00 AM - 5:00 PM)"),
         _buildTimeList("Suggest Time: ", "(9:00 AM , 2:00 PM)"),
         _buildTimeList("Time should spend: ", " 1 hour "),
-        SizedBox(height: 15,),
+        SizedBox(
+          height: 15,
+        ),
       ],
     );
 
@@ -104,7 +95,9 @@ class _State extends State<PlaceDetailScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         placeInfo,
-        SizedBox(height: 15,),
+        SizedBox(
+          height: 15,
+        ),
         placeTime
       ],
     );
@@ -132,19 +125,15 @@ class _State extends State<PlaceDetailScreen> {
     );
   }
 
-  Widget _buildTimeList(String key, String value){
+  Widget _buildTimeList(String key, String value) {
     return Row(
       children: <Widget>[
         Text(key),
         Text(
           value,
-          style: TextStyle(
-              fontSize: 10,
-              color: Colors.lightBlue
-          ),
+          style: TextStyle(fontSize: 10, color: Colors.lightBlue),
         )
       ],
     );
   }
-
 }
