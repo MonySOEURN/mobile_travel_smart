@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:travel_smart/authenticate/sign_in.dart';
+import 'package:travel_smart/authenticate/wrapper.dart';
+import 'package:travel_smart/model/user.dart';
 import 'package:travel_smart/screen/login_profile.dart';
 import 'package:travel_smart/screen/place_screen.dart';
 import 'package:travel_smart/screen/plan_screen.dart';
 import 'package:travel_smart/screen/profile_screen.dart';
 import 'package:travel_smart/screen/register_profile.dart';
 import 'package:travel_smart/screen/save_place_screen.dart';
+import 'package:travel_smart/services/auth.dart';
 
 import 'forget_password.dart';
 
@@ -96,7 +101,10 @@ class _State extends State<StartHomepageScreen>{
                           child: PlanScreen(),
                         ),
                         Container(
-                          child: ForgetPassword(),
+                          child: StreamProvider<User>.value(
+                            value: AuthService().user,
+                              child: Wrapper()
+                          ),
                         ),
                       ]),
                     ),

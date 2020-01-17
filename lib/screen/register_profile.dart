@@ -1,7 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:travel_smart/services/auth.dart';
 
-class RegisterProfile extends StatelessWidget {
-  const RegisterProfile({Key key}) : super(key: key);
+class RegisterProfile extends StatefulWidget {
+  @override
+  _RegisterProfileState createState() => _RegisterProfileState();
+}
+
+class _RegisterProfileState extends State<RegisterProfile> {
+
+
+  final AuthService _auth = AuthService();
+
+  // text field state
+  String password = '';
+  String email = '';
+  String error = '';
+
+  final _formkey = GlobalKey<FormState>();
+
+  TextEditingController emailC = TextEditingController();
+  TextEditingController passwordC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +40,25 @@ class RegisterProfile extends StatelessWidget {
 
       ],
     );
-    
+
     final userNameLabel = Text("User Name :", style: TextStyle(fontSize: 18,),);
     final emailLabel = Text("E-mail :",style: TextStyle(fontSize: 18,),);
     final passwordLabel = Text("Password :",style: TextStyle(fontSize: 18,),);
     final confirmPassLabel = Text("Cornfirm password :",style: TextStyle(fontSize: 18,),);
 
-    final passwordField = TextField(
+    final passwordField = TextFormField(
+      validator: (val){
+        if(val.length < 6){
+          return 'Enter password 6+ chars long';
+        } else {
+          return null;
+        }
+      },
+      onChanged: (val){
+        setState(() {
+          password = val;
+        });
+      },
       decoration: InputDecoration(
         fillColor: Colors.grey,
         border: new OutlineInputBorder(
@@ -37,7 +67,19 @@ class RegisterProfile extends StatelessWidget {
       ),
       obscureText: true,
     );
-    final field = TextField(
+    final field = TextFormField(
+      validator: (val){
+        if(val.isEmpty){
+          return 'Enter email';
+        } else {
+          return null;
+        }
+      },
+      onChanged: (val){
+        setState(() {
+          email = val;
+        });
+      },
       decoration: InputDecoration(
         fillColor: Colors.grey,
         border: new OutlineInputBorder(
@@ -46,70 +88,99 @@ class RegisterProfile extends StatelessWidget {
       ),
     );
 
-    final formWidget = Padding(
-      padding: EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          labelHeaderText,
-          SizedBox(height: 10,),
-          userNameLabel,
-          SizedBox(
-            height: 10,
-          ),
-          field,
-          SizedBox(
-            height: 20,
-          ),
-          emailLabel,
-           SizedBox(
-            height: 10,
-          ),
-          field,
-          SizedBox(
-            height: 20,
-          ),
-          passwordLabel,
-           SizedBox(
-            height: 10,
-          ),
-          passwordField,
-          SizedBox(
-            height: 20,
-          ),
-          confirmPassLabel,
-           SizedBox(
-            height: 10,
-          ),
-          passwordField,
-        ],
-      ),
-    );
-
     final submitBtn = Center(
         child: RaisedButton(
-      color: Colors.green,
-      onPressed: () {},
-      textColor: Colors.white,
-      padding: const EdgeInsets.all(5),
-      child: Container(
-        decoration: const BoxDecoration(),
-        child: const Text('SING UP', style: TextStyle(fontSize: 20)),
-      ),
+          color: Color(0xFF41C300),
+          onPressed: () async {
+//              print(email);
+//              print(password);
+            if(_formkey.currentState.validate()){
+              dynamic result = await _auth.registerWithEmailAndPassword(email, password);
+              if(result == null){
+                setState(() {
+                  error = "please supply valid email";
+                });
+                print("invalid email");
+              }
+              Navigator.of(context).pop();
+            }
+          },
+          textColor: Colors.white,
+          padding: const EdgeInsets.all(5),
+          child: Container(
+            decoration: const BoxDecoration(),
+            child: const Text('SING UP', style: TextStyle(fontSize: 20)),
+          ),
     ));
+
+    final formWidget = Padding(
+      padding: EdgeInsets.all(16),
+      child: Form(
+        key: _formkey,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            labelHeaderText,
+            SizedBox(height: 10,),
+//            userNameLabel,
+//            SizedBox(
+//              height: 10,
+//            ),
+//            field,
+//            SizedBox(
+//              height: 20,
+//            ),
+            emailLabel,
+             SizedBox(
+              height: 10,
+            ),
+            field,
+//            SizedBox(
+//              height: 20,
+//            ),
+            passwordLabel,
+             SizedBox(
+              height: 10,
+            ),
+            passwordField,
+//            SizedBox(
+//              height: 20,
+//            ),
+//            confirmPassLabel,
+//             SizedBox(
+//              height: 10,
+//            ),
+//            passwordField,
+            SizedBox(height: 20,),
+            submitBtn,
+            SizedBox(height: 20,),
+            Text(
+              error,
+              style: TextStyle(
+                  color: Colors.red,
+                  fontSize: 14),
+            ),
+          ],
+        ),
+      ),
+    );
 
     final body = ListView(
       children: <Widget>[
         SizedBox(
           height: 20,
         ),
-      
+
         formWidget,
-        submitBtn,
+//        submitBtn,
        textGmail
       ],
     );
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Travel Smart"),
+        backgroundColor: Color(0xFF41C300),
+      ),
       body: body,
     );
   }

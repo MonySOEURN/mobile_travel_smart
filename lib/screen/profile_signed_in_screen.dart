@@ -1,75 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:travel_smart/services/auth.dart';
 
 class ProfileSignedInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
+    final AuthService _auth = AuthService();
+
     // TODO: implement build
-    return Stack(
+    return ListView(
+      scrollDirection: Axis.vertical,
       children: <Widget>[
-        // Background
-        Container(
-          height: 300,
-          decoration: BoxDecoration(color: Color(0xffD2DBDB)),
-        ),
-        // circle account profile
-        Center(
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                child: Center(
-                    child: Text(
-                  "M",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 204,
-                      fontWeight: FontWeight.bold),
-                )),
-                decoration: BoxDecoration(
-                  color: Color(0xff41C300),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(190),
+        Stack(
+          children: <Widget>[
+            // Background
+            Container(
+              height: 300,
+              decoration: BoxDecoration(color: Color(0xffD2DBDB)),
+            ),
+            // circle account profile
+            Center(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-                height: 280,
-                width: 280,
-              ),
-              Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 40,
+                  Container(
+                    child: Center(
+                        child: Text(
+                          "M",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 204,
+                              fontWeight: FontWeight.bold),
+                        )),
+                    decoration: BoxDecoration(
+                      color: Color(0xff41C300),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(190),
                       ),
-                      _buildUserInformations("User name: ", "Mony SOEURN"),
-                      _buildUserInformations(
-                          "E-mail: ", "soeurn.mony@gmail.com"),
-//                    Spacer(),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      SizedBox(
-                        width: 350,
-                        child: RaisedButton(
-                            color: Color(0xff41c300),
-                            onPressed: () {},
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
+                    ),
+                    height: 280,
+                    width: 280,
+                  ),
+                  Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: 40,
+                          ),
+                          _buildUserInformations("User name: ", "Mony SOEURN"),
+                          _buildUserInformations(
+                              "E-mail: ", "soeurn.mony@gmail.com"),
+                          SizedBox(
+                            height: 50,
+                          ),
+                          SizedBox(
+                            width: 350,
+                            child: RaisedButton(
+                                color: Color(0xff41c300),
+                                onPressed: () async {
+                                  await _auth.signOut();
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
 //                            Icon(Icons.plus_one),
-                                const Text('Log out',
-                                    style: TextStyle(fontSize: 14)),
-                              ],
-                            )),
-                      ),
-                    ],
-                  )),
-            ],
-          ),
+                                    const Text('Log out',
+                                        style: TextStyle(fontSize: 14)),
+                                  ],
+                                )),
+                          ),
+                        ],
+                      )),
+                ],
+              ),
+            ),
+          ],
         ),
       ],
+
     );
   }
 
