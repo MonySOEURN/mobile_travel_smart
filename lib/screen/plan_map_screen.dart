@@ -36,7 +36,7 @@ class PlanMapScreen extends StatelessWidget{
                       Container(
                         height: 500,
                         width: 500,
-                        child: MapWidget(11.5682853,104.8884816),
+                        child: MapSample(),
                       ),
                       Container(
                         child: _buildAddedPlaceListWidget(),
