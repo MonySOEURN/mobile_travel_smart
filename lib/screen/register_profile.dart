@@ -14,6 +14,8 @@ class _RegisterProfileState extends State<RegisterProfile> {
   // text field state
   String password = '';
   String email = '';
+  String user_name ='';
+  String cornfirm_password ='';
   String error = '';
 
   final _formkey = GlobalKey<FormState>();
@@ -87,6 +89,50 @@ class _RegisterProfileState extends State<RegisterProfile> {
         ),
       ),
     );
+  final userName = TextFormField(
+    validator: (val){
+      if (val.isEmpty) {
+        return 'Enter name';
+      }
+      else {
+        return null;
+      }
+    },
+     onChanged: (val){
+        setState(() {
+          user_name = val;
+        });
+      },
+      decoration: InputDecoration(
+        fillColor: Colors.grey,
+        border: new OutlineInputBorder(
+          borderSide: new BorderSide(),
+        ),
+      ),
+  );
+   final confirmpassword = TextFormField(
+    validator: (val){
+      if (val != this.password) {
+        return 'wrong password';
+      }
+      else {
+        return null;
+      }
+    },
+     onChanged: (val){
+        setState(() {
+          cornfirm_password = this.password;
+        });
+      },
+      decoration: InputDecoration(
+        fillColor: Colors.grey,
+        border: new OutlineInputBorder(
+          borderSide: new BorderSide(),
+        ),
+      ),
+      obscureText: true,
+  );
+
 
     final submitBtn = Center(
         child: RaisedButton(
@@ -122,14 +168,14 @@ class _RegisterProfileState extends State<RegisterProfile> {
           children: <Widget>[
             labelHeaderText,
             SizedBox(height: 10,),
-//            userNameLabel,
-//            SizedBox(
-//              height: 10,
-//            ),
-//            field,
-//            SizedBox(
-//              height: 20,
-//            ),
+           userNameLabel,
+           SizedBox(
+             height: 10,
+           ),
+           userName,
+           SizedBox(
+             height: 20,
+           ),
             emailLabel,
              SizedBox(
               height: 10,
@@ -143,14 +189,14 @@ class _RegisterProfileState extends State<RegisterProfile> {
               height: 10,
             ),
             passwordField,
-//            SizedBox(
-//              height: 20,
-//            ),
-//            confirmPassLabel,
-//             SizedBox(
-//              height: 10,
-//            ),
-//            passwordField,
+           SizedBox(
+             height: 20,
+           ),
+           confirmPassLabel,
+            SizedBox(
+             height: 10,
+           ),
+           confirmpassword,
             SizedBox(height: 20,),
             submitBtn,
             SizedBox(height: 20,),
