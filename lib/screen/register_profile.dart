@@ -14,8 +14,8 @@ class _RegisterProfileState extends State<RegisterProfile> {
   // text field state
   String password = '';
   String email = '';
-  String user_name ='';
-  String cornfirm_password ='';
+  String userName ='';
+  String cornfirmPassword ='';
   String error = '';
 
   final _formkey = GlobalKey<FormState>();
@@ -89,7 +89,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
         ),
       ),
     );
-  final userName = TextFormField(
+  final userNameField = TextFormField(
     validator: (val){
       if (val.isEmpty) {
         return 'Enter name';
@@ -100,7 +100,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
     },
      onChanged: (val){
         setState(() {
-          user_name = val;
+          userName = val;
         });
       },
       decoration: InputDecoration(
@@ -113,7 +113,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
    final confirmpassword = TextFormField(
     validator: (val){
       if (val != this.password) {
-        return 'wrong password';
+        return 'password is not match';
       }
       else {
         return null;
@@ -121,7 +121,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
     },
      onChanged: (val){
         setState(() {
-          cornfirm_password = this.password;
+          cornfirmPassword = this.password;
         });
       },
       decoration: InputDecoration(
@@ -172,7 +172,7 @@ class _RegisterProfileState extends State<RegisterProfile> {
            SizedBox(
              height: 10,
            ),
-           userName,
+           userNameField,
            SizedBox(
              height: 20,
            ),
