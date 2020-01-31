@@ -15,6 +15,7 @@ import 'forget_password.dart';
 
 class StartHomepageScreen extends StatefulWidget{
 
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState
@@ -24,11 +25,13 @@ class StartHomepageScreen extends StatefulWidget{
 
 
 class _State extends State<StartHomepageScreen>{
-
+  String filterValue = '';
   final menu = ["All","Morning","Afternoon","Evening"];
 
   @override
   Widget build(BuildContext context) {
+
+    final String filterValue = '';
 
     final searchIcon = _buildAppBarIcons(Icon(Icons.search), (){
       print("press search");
@@ -92,7 +95,7 @@ class _State extends State<StartHomepageScreen>{
                     child: Container(
                       child: TabBarView(children: [
                         Container(
-                          child: PlaceScreen(),
+                          child: PlaceScreen(this.filterValue),
                         ),
                         Container(
                           child: SavePlaceScreen(),
@@ -120,19 +123,32 @@ class _State extends State<StartHomepageScreen>{
   void _choiceAction(String choice){
     switch(choice){
       case "All":{
-        print("All");
+        filterValue = '';
+        setState(() {
+
+        });
         break;
       }
       case "Morning":{
-        print("Morning");
+        filterValue = 'Morning';
+        setState(() {
+
+        });
         break;
       }
       case "Afternoon":{
-        print("Afternoon");
+        filterValue = 'Afternoon';
+        setState(() {
+
+        });
         break;
       }
       default :{
-        print("Evening");
+        filterValue = 'Evening';
+        print(filterValue);
+        setState(() {
+
+        });
       }
     }
   }
