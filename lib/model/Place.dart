@@ -2,6 +2,7 @@ class Place{
   String placeImage;
   String placeName;
   String placeLocation;
+  String placeCategory;
   int placeRate;
   String time;
   String suggestTime;

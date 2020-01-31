@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_smart/model/Place.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class PlaceDetailScreen extends StatefulWidget {
   final Place place;
@@ -49,7 +51,16 @@ class _State extends State<PlaceDetailScreen> {
       child: Row(
         children: <Widget>[
           RaisedButton.icon(
-              onPressed: null,
+              onPressed: (){
+                Firestore.instance.collection('save_place').document().setData({'id' : DateTime.now().toLocal().millisecond,
+                  'placeCategory': widget.place.placeCategory,
+                  'placeImage': widget.place.placeImage,
+                  'placeLocation': widget.place.placeLocation,
+                  'placeName': widget.place.placeName,
+                  'placeRate': widget.place.placeRate});
+                print(widget.place.placeName);
+
+              },
               icon: Icon(
                 Icons.flag,
                 color: Colors.black,
